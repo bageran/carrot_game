@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,13 +13,13 @@ body {
     height: 100vh;
 }
 
-.bg {
+.game-box {
     width: 1040px;
     height: 585px;
     background-image: url('img/background.png');
     background-size: contain;
     background-repeat: no-repeat;
-    background-color: red;
+
     border-radius: 10px;
 }
 
@@ -67,12 +67,10 @@ body {
     height: 50px;
     border-radius: 8px;
     border: 4px solid black;
+    background-color: white;
+    color: black;
     font-size: 2.5rem;
     font-weight: bold;
-}
-
-input.timer::placeholder {
-    color: black;
 }
 
 .carrot-counter {
@@ -86,9 +84,11 @@ input.timer::placeholder {
     border: 4px solid black;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #333;
-}
-
-input.carrot-counter::placeholder {
     color: white;
 }
+
+#canvas {
+    width: 100%;
+    height: 335px;
+}
+

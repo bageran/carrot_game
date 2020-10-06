@@ -10,16 +10,17 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="bg">
+        <div class="game-box">
             <div class="header">
                 <button class="btn-play"><i class="fas fa-play"></i></button>
                 <button class="btn-stop"><i class="fas fa-stop"></i></button>
-                <input type="text" class="timer" placeholder="00:00">
-                <input type="text" class="carrot-counter" placeholder="10">
+                <div class="timer">00:00</div>
+                <div class="carrot-counter">10</div>
             </div>
-            <div class="ground">
-                <!-- 당근과 벌레가 뿌려지는 곳 -->
-            </div>
+            <canvas id="canvas">
+                <img src="img/bug.png" width="50px" height="50px" class="bug-img">
+                <img src="img/carrot.png" class="carrot-img">
+            </canvas>
         </div>
     </div>
 </body>
