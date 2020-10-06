@@ -9,8 +9,8 @@ window.onload = function() {
     console.log(bugX);
     console.log(bugY);
 
-    let carrotX = Math.random() * 104;
-    let carrotY = Math.random() * 33;
+    let carrotX = Math.random() * 960;
+    let carrotY = Math.random() * 255;
 
     ctx.drawImage(imgCarrot, carrotX, carrotY);
     ctx.drawImage(imgBug, bugX, bugY);
