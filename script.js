@@ -1,22 +1,3 @@
-// window.onload = function() {
-//     let canvas = document.querySelector("#canvas");
-//     let ctx = canvas.getContext("2d");
-//     let imgBug = document.querySelector(".bug-img");
-//     let imgCarrot = document.querySelector(".carrot-img")
-
-//     let bugX = Math.random() * 990;
-//     let bugY = Math.random() * 285;
-//     console.log(bugX);
-//     console.log(bugY);
-
-//     let carrotX = Math.random() * 960;
-//     let carrotY = Math.random() * 255;
-
-//     ctx.drawImage(imgCarrot, carrotX, carrotY);
-//     ctx.drawImage(imgBug, bugX, bugY);
-    
-//   }
-
 window.onload = function() {
     setTimer();
     setItems();
@@ -27,13 +8,20 @@ play.addEventListener('click', function() {
     let canvas = document.querySelector("#canvas");
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     setItems();
+    setTimer();
 });
+
+
+
 
 function setItems() {
     let canvas = document.querySelector("#canvas");
     let ctx = canvas.getContext("2d");
     let imgBug = document.querySelector(".bug-img");
     let imgCarrot = document.querySelector(".carrot-img")
+    imgCarrot.addEventListener("click", function() {
+        alert("Hello World!");
+    });
     
     for (let i = 0 ; i < 20 ; i++) {
         ctx.drawImage(imgCarrot, Math.random() * 960, Math.random() * 255);
@@ -42,10 +30,14 @@ function setItems() {
     for (let b = 0 ; b < 20 ; b++) {
         ctx.drawImage(imgBug, Math.random() * 990, Math.random() * 285);
     }
+
+
 }
 
+
+
 function setTimer() {
-    let time = 11;
+    let time = 10;
     let sec = "";
     let x = setInterval(function() {
         sec = time - 1;
@@ -54,7 +46,7 @@ function setTimer() {
 
         if (time < 0) {
             clearInterval(x);
-            alert("Game Over!");
+            // alert("Game Over!");
             document.querySelector(".timer").innerHTML = "0초";
         }
     },1000)
