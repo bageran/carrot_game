@@ -101,6 +101,7 @@ body {
 #canvas {
     width: 1040px;
     height: 335px;
+    position: relative;
 }
 
 .popup {
