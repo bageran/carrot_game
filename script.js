@@ -8,13 +8,11 @@ window.onload = function() {
 
 const play = document.querySelector(".btn-play");
 play.addEventListener('click', function() {
-    setTimer();
-    setCarrots();
-    setBugs();
+    window.location.reload();
 });
 
 function setCarrots() {
-    for (let i = 0 ; i < 20 ; i++) {
+    for (let i = 0 ; i < 5 ; i++) {
         let imgCarrotX = Math.random() * 960;
         let imgCarrotY = Math.random() * 255;
 
@@ -22,16 +20,24 @@ function setCarrots() {
         imgCarrot.setAttribute('class', 'carrot-item')
         imgCarrot.innerHTML = "<img src='img/carrot.png' style='position:absolute; left:"+imgCarrotX+"px; top: "+imgCarrotY+"px;'>";
 
+        canvas.appendChild(imgCarrot);           
+        
         imgCarrot.addEventListener('click', () => {
             console.log('뿅');
+            
+            let pickCarrot = new Audio('sound/carrot_pull.mp3');
+            pickCarrot.play();
+
             imgCarrot.remove();
+
+            playCounter();
+
         });
-        canvas.appendChild(imgCarrot);                
     }
 }
 
 function setBugs() {
-    for (let i = 0 ; i < 20 ; i++) {
+    for (let i = 0 ; i < 5 ; i++) {
         let imgBugX = Math.random() * 990;
         let imgBugY = Math.random() * 285;
 
@@ -39,6 +45,11 @@ function setBugs() {
         imgBug.innerHTML = "<img src='img/bug.png' style='position:absolute; left:"+imgBugX+"px; top: "+imgBugY+"px;'>";
 
         canvas.appendChild(imgBug);
+
+        imgBug.addEventListener('click', () => {
+            let pickBug = new Audio('sound/bug_pull.mp3');
+            pickBug.play();
+        });
     }
 }
 
@@ -62,20 +73,30 @@ function setBugs() {
 
 function setTimer() {
     let time = 10;
-    let sec = "";
     let x = setInterval(function() {
-        sec = time - 1;
-        document.querySelector(".timer").innerHTML = sec + "초";
+        sec = time;
+        document.querySelector(".timer").innerHTML = time + "초";
         time--;
 
         if (time < 0) {
             clearInterval(x);
             // alert("Game Over!");
             document.querySelector(".timer").innerHTML = "0초";
+            let alretAudio = new Audio('sound/alert.wav');
+            alretAudio.play();
         }
     },1000)
 }
 
-function showPopup() {
-
+let counter = 5;
+function playCounter() {
+    console.log('빼기빼기');
+    let countCarrot = document.querySelector(".carrot-counter");
+    counter--;
+    countCarrot.innerText = counter;
+    if (counter == 0) {
+        console.log('win');
+        let winAudio = new Audio('sound/game_win.mp3');
+        winAudio.play();
+    }
 }
