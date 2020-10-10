@@ -1,4 +1,5 @@
 const canvas = document.querySelector("#canvas");
+const gameBox = document.querySelector('.game-box');
 
 window.onload = function() {
     setTimer();
@@ -29,9 +30,6 @@ function setCarrots() {
             pickCarrot.play();
 
             imgCarrot.remove();
-
-            playCounter();
-
         });
     }
 }
@@ -53,26 +51,8 @@ function setBugs() {
     }
 }
 
-
-
-/* 캔버스 삽질 */
-// function setItems() {
-//     let canvas = document.querySelector("#canvas");
-//     let ctx = canvas.getContext("2d");
-//     let imgBug = document.querySelector(".bug-img");
-//     let imgCarrot = document.querySelector(".carrot-img");
-    
-//     for (let i = 0 ; i < 20 ; i++) {
-//         ctx.drawImage(imgCarrot, Math.random() * 960, Math.random() * 255);
-//     }
-
-//     for (let b = 0 ; b < 20 ; b++) {
-//         ctx.drawImage(imgBug, Math.random() * 990, Math.random() * 285);
-//     }
-// }
-
 function setTimer() {
-    let time = 10;
+    let time = 5;
     let x = setInterval(function() {
         sec = time;
         document.querySelector(".timer").innerHTML = time + "초";
@@ -84,19 +64,73 @@ function setTimer() {
             document.querySelector(".timer").innerHTML = "0초";
             let alretAudio = new Audio('sound/alert.wav');
             alretAudio.play();
+
+            let failPopup = showRefreshPopup();
+            gameBox.appendChild(failPopup);
+
+            return;
         }
     },1000)
 }
 
 let counter = 5;
-function playCounter() {
+function playCounter(number) {
     console.log('빼기빼기');
     let countCarrot = document.querySelector(".carrot-counter");
     counter--;
     countCarrot.innerText = counter;
     if (counter == 0) {
-        console.log('win');
         let winAudio = new Audio('sound/game_win.mp3');
         winAudio.play();
+       
+        let winPopup = showWinPopup();
+        gameBox.appendChild(winPopup);
+
     }
 }
+
+function showWinPopup() {
+    let winPopup = document.createElement('div');
+    winPopup.setAttribute('class', 'popup');
+
+    let btnRefresh = document.createElement('button');
+    btnRefresh.setAttribute('class', 'btn-refresh');
+    btnRefresh.innerHTML = `<i class="fas fa-redo"></i>`;
+    btnRefresh.addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    let textReplay = document.createElement('p');
+    textReplay.setAttribute('class', 'text-replay');
+    textReplay.innerText = 'You Win! 🎉'
+
+    winPopup.appendChild(btnRefresh);
+    winPopup.appendChild(textReplay);
+
+    return winPopup;
+}
+
+function showRefreshPopup() {
+    let failPopup = document.createElement('div');
+    failPopup.setAttribute('class', 'popup');
+
+    let btnRefresh = document.createElement('button');
+    btnRefresh.setAttribute('class', 'btn-refresh');
+    btnRefresh.innerHTML = `<i class="fas fa-redo"></i>`;
+    btnRefresh.addEventListener('click', () => {
+        window.location.reload();
+    });
+
+    let textReplay = document.createElement('p');
+    textReplay.setAttribute('class', 'text-replay');
+    textReplay.innerText = 'You lose. Refresh?'
+
+    failPopup.appendChild(btnRefresh);
+    failPopup.appendChild(textReplay);
+
+    return failPopup;
+}
+
+
+
+
