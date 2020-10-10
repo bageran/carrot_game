@@ -1,6 +1,7 @@
 const canvas = document.querySelector("#canvas");
 const gameBox = document.querySelector('.game-box');
 
+
 window.onload = function() {
     setTimer();
     setCarrots();
@@ -8,12 +9,14 @@ window.onload = function() {
 }
 
 const play = document.querySelector(".btn-play");
-play.addEventListener('click', function() {
+play.addEventListener('click', () => {
+    let backAudio = new Audio('sound/bg.mp3');
+    backAudio.play();
     window.location.reload();
 });
 
 function setCarrots() {
-    for (let i = 0 ; i < 5 ; i++) {
+    for (let i = 0 ; i < 15 ; i++) {
         let imgCarrotX = Math.random() * 960;
         let imgCarrotY = Math.random() * 255;
 
@@ -30,12 +33,14 @@ function setCarrots() {
             pickCarrot.play();
 
             imgCarrot.remove();
+
+            playCounter();
         });
     }
 }
 
 function setBugs() {
-    for (let i = 0 ; i < 5 ; i++) {
+    for (let i = 0 ; i < 25 ; i++) {
         let imgBugX = Math.random() * 990;
         let imgBugY = Math.random() * 285;
 
@@ -52,15 +57,18 @@ function setBugs() {
 }
 
 function setTimer() {
-    let time = 5;
+    let time = 10;
     let x = setInterval(function() {
         sec = time;
         document.querySelector(".timer").innerHTML = time + "초";
         time--;
 
-        if (time < 0) {
+        if (counter == 0) {
             clearInterval(x);
-            // alert("Game Over!");
+            document.querySelector(".timer").innerHTML = (sec+1) + "초";
+
+        } else if (time < 0) {
+            clearInterval(x);
             document.querySelector(".timer").innerHTML = "0초";
             let alretAudio = new Audio('sound/alert.wav');
             alretAudio.play();
@@ -73,8 +81,8 @@ function setTimer() {
     },1000)
 }
 
-let counter = 5;
-function playCounter(number) {
+let counter = 15;
+function playCounter() {
     console.log('빼기빼기');
     let countCarrot = document.querySelector(".carrot-counter");
     counter--;
@@ -85,7 +93,6 @@ function playCounter(number) {
        
         let winPopup = showWinPopup();
         gameBox.appendChild(winPopup);
-
     }
 }
 
@@ -107,6 +114,8 @@ function showWinPopup() {
     winPopup.appendChild(btnRefresh);
     winPopup.appendChild(textReplay);
 
+    play.remove();
+
     return winPopup;
 }
 
@@ -127,6 +136,8 @@ function showRefreshPopup() {
 
     failPopup.appendChild(btnRefresh);
     failPopup.appendChild(textReplay);
+
+    play.remove();
 
     return failPopup;
 }
