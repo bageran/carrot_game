@@ -132,7 +132,7 @@ function showRefreshPopup() {
 
     let textReplay = document.createElement('p');
     textReplay.setAttribute('class', 'text-replay');
-    textReplay.innerText = 'You lose. Refresh?'
+    textReplay.innerText = 'You lose. 💩'
 
     failPopup.appendChild(btnRefresh);
     failPopup.appendChild(textReplay);
