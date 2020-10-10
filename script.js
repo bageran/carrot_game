@@ -57,7 +57,7 @@ function setBugs() {
 }
 
 function setTimer() {
-    let time = 10;
+    let time = 9;
     let x = setInterval(function() {
         sec = time;
         document.querySelector(".timer").innerHTML = time + "초";
