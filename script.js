@@ -104,7 +104,10 @@ function showWinPopup() {
     btnRefresh.setAttribute('class', 'btn-refresh');
     btnRefresh.innerHTML = `<i class="fas fa-redo"></i>`;
     btnRefresh.addEventListener('click', () => {
-        window.location.reload();
+        // window.location.reload();
+        setTimer();
+        setCarrots();
+        setBugs();
     });
 
     let textReplay = document.createElement('p');
